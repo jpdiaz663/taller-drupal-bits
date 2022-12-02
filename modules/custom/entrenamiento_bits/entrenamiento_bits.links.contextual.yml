@@ -1,0 +1,10 @@
+entity.colaboradores_bits.edit_form:
+  route_name: entity.colaboradores_bits.edit_form
+  group: colaboradores_bits
+  title: Edit
+
+entity.colaboradores_bits.delete_form:
+  route_name: entity.colaboradores_bits.delete_form
+  group: colaboradores_bits
+  title: Delete
+  weight: 10

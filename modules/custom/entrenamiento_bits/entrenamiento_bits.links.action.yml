@@ -1,0 +1,5 @@
+colaboradores_bits.add_form:
+  title: 'Add entrenamiento bits'
+  route_name: entity.colaboradores_bits.add_form
+  appears_on:
+    - entity.colaboradores_bits.collection

@@ -1,0 +1,6 @@
+name: Taller 1
+description: A simple sample.
+package: Custom
+type: module
+core_version_requirement: ^8.8.0 || ^9 || ^10
+version: '1.0'

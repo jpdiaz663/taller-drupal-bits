@@ -1,0 +1,7 @@
+entity.colaboradores_bits.settings:
+  path: 'admin/structure/colaboradores-bits'
+  defaults:
+    _form: '\Drupal\entrenamiento_bits\Form\ColaboradoresBitsSettingsForm'
+    _title: 'Entrenamiento bits'
+  requirements:
+    _permission: 'administer entrenamiento bits'

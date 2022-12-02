@@ -1,0 +1,84 @@
+<?php
+
+/**
+ * @file
+ * Provides an entrenamiento bits entity type.
+ */
+
+use Drupal\Core\Render\Element;
+use Drupal\entrenamiento_bits\Entity\ColaboradoresBits;
+use Drupal\user\UserInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function entrenamiento_bits_theme() {
+  return [
+    'colaboradores_bits' => [
+      'render element' => 'elements',
+    ],
+  ];
+}
+
+/**
+ * Prepares variables for entrenamiento bits templates.
+ *
+ * Default template: colaboradores-bits.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the entrenamiento bits information and any
+ *     fields attached to the entity.
+ *   - attributes: HTML attributes for the containing element.
+ */
+function template_preprocess_colaboradores_bits(array &$variables) {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+}
+
+/**
+ * Implements hook_user_cancel().
+ */
+function entrenamiento_bits_user_cancel($edit, UserInterface $account, $method) {
+  switch ($method) {
+    case 'user_cancel_block_unpublish':
+      // Unpublish entrenamiento bitss.
+      $storage = \Drupal::entityTypeManager()->getStorage('colaboradores_bits');
+      $colaboradores_bits_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->condition('status', 1)
+        ->execute();
+      foreach ($storage->loadMultiple($colaboradores_bits_ids) as $colaboradores_bits) {
+        $colaboradores_bits->set('status', FALSE);
+        $colaboradores_bits->save();
+      }
+      break;
+
+    case 'user_cancel_reassign':
+      // Anonymize entrenamiento bitss.
+      $storage = \Drupal::entityTypeManager()->getStorage('colaboradores_bits');
+      $colaboradores_bits_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->execute();
+      foreach ($storage->loadMultiple($colaboradores_bits_ids) as $colaboradores_bits) {
+        $colaboradores_bits->setOwnerId(0);
+        $colaboradores_bits->save();
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_predelete() for user entities.
+ */
+function entrenamiento_bits_user_predelete(UserInterface $account) {
+  // Delete entrenamiento bitss.
+  $storage = \Drupal::entityTypeManager()->getStorage('colaboradores_bits');
+  $colaboradores_bits_ids = $storage->getQuery()
+    ->condition('uid', $account->id())
+    ->execute();
+  $colaboradores_bitss = $storage->loadMultiple($colaboradores_bits_ids);
+  $storage->delete($colaboradores_bitss);
+}

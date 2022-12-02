@@ -1,0 +1,3 @@
+administer employee:
+  title: 'Administer employee settings'
+  restrict access: true

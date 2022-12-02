@@ -1,0 +1,9 @@
+services:
+  taller_1.validator:
+      class: Drupal\taller_1\Form\Validators\Validator
+
+  taller_1.creator:
+    class: Drupal\taller_1\Employee\EmployeeCreator
+
+  taller_1.city_provider:
+    class: Drupal\taller_1\Provider\CityProvider

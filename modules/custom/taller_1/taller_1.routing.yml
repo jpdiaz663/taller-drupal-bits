@@ -1,0 +1,16 @@
+entity.employee.settings:
+  path: 'admin/structure/employee'
+  defaults:
+    _form: '\Drupal\taller_1\Form\EmployeeSettingsForm'
+    _title: 'Employee'
+  requirements:
+    _permission: 'administer employee'
+
+
+taller_1,form_person:
+  path: 'admin/form/person'
+  defaults:
+    _form: '\Drupal\taller_1\Form\EmployeeForm'
+    _title: 'Employee'
+  requirements:
+    _permission: 'administer employee'

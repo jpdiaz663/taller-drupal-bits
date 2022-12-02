@@ -1,0 +1,22 @@
+entity.colaboradores_bits.settings:
+  title: 'Settings'
+  route_name: entity.colaboradores_bits.settings
+  base_route: entity.colaboradores_bits.settings
+entity.colaboradores_bits.view:
+  title: 'View'
+  route_name: entity.colaboradores_bits.canonical
+  base_route: entity.colaboradores_bits.canonical
+entity.colaboradores_bits.edit_form:
+  title: 'Edit'
+  route_name: entity.colaboradores_bits.edit_form
+  base_route: entity.colaboradores_bits.canonical
+entity.colaboradores_bits.delete_form:
+  title: 'Delete'
+  route_name: entity.colaboradores_bits.delete_form
+  base_route: entity.colaboradores_bits.canonical
+  weight: 10
+entity.colaboradores_bits.collection:
+  title: 'Entrenamiento bitss'
+  route_name: entity.colaboradores_bits.collection
+  base_route: system.admin_content
+  weight: 10

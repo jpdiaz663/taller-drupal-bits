@@ -1,0 +1,9 @@
+name: Entrenamiento Bits
+description: A simple sample.
+package: Custom
+type: module
+core_version_requirement: ^8.8.0 || ^9 || ^10
+dependencies:
+  - restui
+
+version: '1.0'

@@ -1,0 +1,11 @@
+entity.colaboradores_bits.settings:
+  title: 'Entrenamiento bits'
+  description: 'Configure an Entrenamiento bits entity type.'
+  route_name:  entity.colaboradores_bits.settings
+  parent: system.admin_config_system
+
+entity.colaboradores_bits.collection:
+  title: 'Entrenamiento bitss'
+  description: 'List of entrenamiento bitss.'
+  route_name: entity.colaboradores_bits.collection
+  parent: system.admin_content

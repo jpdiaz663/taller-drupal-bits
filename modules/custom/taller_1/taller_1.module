@@ -1,0 +1,99 @@
+<?php
+
+/**
+ * @file
+ * Provides an employee entity type.
+ */
+
+use Drupal\Core\Render\Element;
+use Drupal\taller_1\Entity\Employee;
+use Drupal\user\UserInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function taller_1_theme() {
+  return [
+    'employee' => [
+      'render element' => 'elements',
+    ],
+  ];
+}
+
+/**
+ * Prepares variables for employee templates.
+ *
+ * Default template: employee.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the employee information and any
+ *     fields attached to the entity.
+ *   - attributes: HTML attributes for the containing element.
+ */
+function template_preprocess_employee(array &$variables) {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+}
+
+/**
+ * Implements hook_user_cancel().
+ */
+function taller_1_user_cancel($edit, UserInterface $account, $method) {
+  switch ($method) {
+    case 'user_cancel_block_unpublish':
+      // Unpublish employees.
+      $storage = \Drupal::entityTypeManager()->getStorage('employee');
+      $employee_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->condition('status', 1)
+        ->execute();
+      foreach ($storage->loadMultiple($employee_ids) as $employee) {
+        $employee->set('status', FALSE);
+        $employee->save();
+      }
+      break;
+
+    case 'user_cancel_reassign':
+      // Anonymize employees.
+      $storage = \Drupal::entityTypeManager()->getStorage('employee');
+      $employee_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->execute();
+      foreach ($storage->loadMultiple($employee_ids) as $employee) {
+        $employee->setOwnerId(0);
+        $employee->save();
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_predelete() for user entities.
+ */
+function taller_1_user_predelete(UserInterface $account) {
+  // Delete employees.
+  $storage = \Drupal::entityTypeManager()->getStorage('employee');
+  $employee_ids = $storage->getQuery()
+    ->condition('uid', $account->id())
+    ->execute();
+  $employees = $storage->loadMultiple($employee_ids);
+  $storage->delete($employees);
+}
+
+
+function taller_1_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $formState) {
+
+}
+
+function taller_1_employee_presave(Drupal\Core\Entity\EntityInterface $entity) {
+
+  /** @var Employee $employee */
+  $employee = $entity;
+  $employee->setTimeWorked(10);
+
+}
+
+
