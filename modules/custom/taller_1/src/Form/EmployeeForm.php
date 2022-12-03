@@ -178,7 +178,7 @@ class EmployeeForm extends FormBase
        $creator->fromArray($fields);
       \Drupal::messenger()->addMessage('El empleado se ha guardado con exito!');
 
-    } catch (FailCreationException|EntityStorageException $ex) {
+    } catch (FailCreationException $ex) {
       \Drupal::messenger()->addError('Ah ocurrido un error por favor verfique los datos. '. $ex->getMessage());
     }
 

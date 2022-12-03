@@ -9,10 +9,14 @@ use Drupal\taller_1\Entity\Employee;
 class EmployeeCreator
 {
 
-  private EntityBase $employee;
+  private ?EntityBase $employee;
 
   public function fromArray(array $data): void
   {
+
+    if(empty($data)){
+      throw new FailCreationException('Error campos vacios.');
+    }
 
     $this->employee = Employee::create($data);
 

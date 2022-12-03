@@ -1,24 +1,31 @@
 <?php
 
-namespace src\Unit;
+namespace Drupal\Tests\taller_1\Unit;
 
-use Drupal\taller_1\tests\Unit\Employee\EmployeeCreatorTest;
+
+use Drupal\taller_1\Provider\CityProvider;
 
 class CityProviderTest extends \PHPUnit\Framework\TestCase
 {
   /**
    * @dataProvider healthStatusProvider
    */
-  public function testIsValidFindStateFromString(string $expect, string $actual)
+  public function testIsValidFindStateFromString(string $state, array $actual)
   {
-    self::assertSame($expect, $actual);
-  }
+    $provider = new CityProvider();
+    $cities = $provider->getByState($state);
 
+    $this->assertSame($cities, $actual);
+
+  }
 
   public function healthStatusProvider(): \Generator
   {
-    yield 'Invalid state' => ['Cundinamarca', 'xxxxxx'];
-    yield 'Valid find state' => ['Cundinamarca', 'Cundinamarca'];
+    yield 'Invalid state' => ['xxx', []];
+    yield 'Valid find state' => ['Cundinamarca', [
+      'Bogota',
+      'Pacho',
+    ]];
   }
 
 }

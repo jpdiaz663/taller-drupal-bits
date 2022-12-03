@@ -1,17 +1,20 @@
 <?php
 
-namespace Drupal\taller_1\tests\Unit\Employee;
+namespace Drupal\Tests\taller_1\Unit\Employee;
 
 
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\taller_1\Employee\EmployeeCreator;
 use Drupal\taller_1\Employee\FailCreationException;
+use Drupal\Tests\UnitTestCase;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Drupal\taller_1\Employee\EmployeeCreator
  * @group taller_1
  */
-class EmployeeCreatorTest extends TestCase
+class EmployeeCreatorTest extends UnitTestCase
 {
   private EmployeeCreator $employeeCreator;
 
@@ -19,22 +22,19 @@ class EmployeeCreatorTest extends TestCase
   {
     parent::setUp();
 
-    $this->employeeCreator = new EmployeeCreator;
+    $this->employeeCreator = new EmployeeCreator();
   }
 
 
   public function testCreateFromArrayFailCreationException()
   {
 
-    $this->employeeCreator->fromArray(
-      [
-        ['enterprise' => ['xxxxx']]
-      ]
-    );
-
     $this->expectException(FailCreationException::class);
-    $this->expectExceptionMessage('Error al salvar la data.');
+    $this->expectExceptionMessage('Error campos vacios.');
+
+    $this->employeeCreator->fromArray([]);
 
   }
+
 
 }

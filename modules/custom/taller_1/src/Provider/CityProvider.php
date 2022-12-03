@@ -5,9 +5,9 @@ namespace Drupal\taller_1\Provider;
 class CityProvider
 {
 
-  private array $states;
+  private array $states = [];
 
-  public function getAll(): array
+  public function all(): array
   {
     return $this->states = [
       'Cundinamarca' => [
@@ -17,17 +17,30 @@ class CityProvider
       'Boyaca' => [
         'Duitama',
         'Sogamoso'
-      ]
+      ],
     ];
   }
 
-  public function getByState(string $state) {
+  public function getByState(string $state): array
+  {
 
-    if (!empty($this->states)) {
-        return $this->states[$state] ?? [];
+    $isCached = empty($this->states);
+
+    if ($isCached) {
+       $this->all();
     }
 
-    return $this->getAll()[$state];
+   if (!$this->exist($state)) {
+      return [];
+   }
+
+    return $this->states[$state];
+
+  }
+
+  private function exist(string $state): bool
+  {
+    return array_key_exists($state, $this->states);
   }
 
 }
