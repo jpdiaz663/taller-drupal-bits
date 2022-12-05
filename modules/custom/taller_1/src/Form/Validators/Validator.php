@@ -25,6 +25,9 @@ class Validator
     return false;
   }
 
+  /**
+   * @return Constraints[]
+   */
   public function getConstraints(): array
   {
     return $this->constraints;

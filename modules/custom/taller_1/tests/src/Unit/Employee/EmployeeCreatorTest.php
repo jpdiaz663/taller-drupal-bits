@@ -23,7 +23,7 @@ class EmployeeCreatorTest extends UnitTestCase
   }
 
 
-  public function testCreateFromArrayFailCreationException()
+  public function testCreateFromArrayWithParamValueEmptyFailCreationException()
   {
 
     $this->expectException(FailCreationException::class);
