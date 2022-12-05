@@ -52,9 +52,11 @@ class Validator
     return \count($this->constraints);
   }
 
-  private function add(...$constraints)
+  private function add(Constraints $constraints): array
   {
     $this->constraints[] = $constraints;
+
+    return $this->constraints;
   }
 
 
