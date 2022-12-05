@@ -54,7 +54,7 @@ class Validator
 
   private function add(...$constraints)
   {
-    $this->constraints = $constraints;
+    $this->constraints[] = $constraints;
   }
 
 
