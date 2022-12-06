@@ -14,9 +14,7 @@ class EmployeeCreator
   public function fromArray(array $data): void
   {
 
-    if(empty($data)){
-      throw new FailCreationException('Error campos vacios.');
-    }
+    empty($data) && throw new FailCreationException('Error campos vacios.');
 
     $this->employee = Employee::create($data);
 
