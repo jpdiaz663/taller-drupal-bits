@@ -68,7 +68,7 @@ class ColaboradoresBitsSettingsForm extends ConfigFormBase {
     parent::submitForm($form, $form_state);
 
     $this->config('colabs.settings')
-      ->set('container', $form_state->getValue('api_key'))
+      ->set('api_key', $form_state->getValue('api_key'))
       ->save();
 
     $this->messenger()->addStatus($this->t('The configuration has been updated.'));

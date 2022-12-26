@@ -82,7 +82,7 @@ class EmployeeListBuilder extends EntityListBuilder {
   public function buildRow(EntityInterface $entity) {
     /** @var \Drupal\taller_1\EmployeeInterface $entity */
     $row['id'] = $entity->id();
-    $row['name'] = $entity->toLink();
+    $row['name'] = $entity->get('field_name')->getValue()[0]['value'];
     $row['status'] = $entity->get('status')->value ? $this->t('Enabled') : $this->t('Disabled');
     $row['uid']['data'] = [
       '#theme' => 'username',

@@ -1,5 +1,6 @@
 employee.add_form:
   title: 'Add employee'
-  route_name: entity.employee.add_form
+  #route_name: entity.employee.add_form
+  route_name: taller_1.form_person
   appears_on:
     - entity.employee.collection

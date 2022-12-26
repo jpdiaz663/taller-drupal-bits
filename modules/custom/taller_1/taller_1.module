@@ -5,6 +5,8 @@
  * Provides an employee entity type.
  */
 
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Render\Element;
 use Drupal\taller_1\Entity\Employee;
 use Drupal\user\UserInterface;
